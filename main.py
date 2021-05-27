@@ -130,4 +130,4 @@ async def ban(ctx, member: discord.Member, *, reason=None):
 
 
 # funny token thingy #
-client.run("ODQ0MjMxOTYyMTEzMjEyNDE3.YKPaSA.1uCDhuafIsZ7Z1XPe0IImIBO_4s")
+client.run(";3")
