@@ -10,3 +10,4 @@ gmail: nikbikyt@gmail.com
 
 ### about me
 Iam 16, iam programing with python now for 6 years, I can program with C++, JavaSript but not well.
+If u have any more questions u can messege me on discord or gmail.
