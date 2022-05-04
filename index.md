@@ -5,6 +5,8 @@ Iam making this bot with discord.py. I will be adding features to it as time goe
 ### conntact info
 `
 discord: ~nikbik~#4507
+
+
 gmail: nikbikyt@gmail.com
 `
 ### about me
