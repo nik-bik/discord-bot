@@ -2,13 +2,80 @@ import json
 import discord
 import random
 from discord.ext import commands
+import youtube_dl
+import os
+
 
 client = commands.Bot(command_prefix=".", intents=discord.Intents.all())
-
+#start something msg idk why u ask me#
 @client.event
 async def on_ready():
-    print("good morning u cutie")
+    greeting = ["hewo",
+                ";3",
+                "iam back uwu",
+                "welcome home",
+                "just leave ur stuff here",
+                "ON",
+                "iam lazy bruh"]
+    print(random.choice(greeting))
+#music#
+@client.command()
+async def play(ctx, url : str):
+    song_there = os.path.isfile("song.mp3")
+    try:
+        if song_there:
+            os.remove("song.mp3")
+    except PermissionError:
+        await ctx.send("Wait for the current playing music to end or use the 'stop' command")
+        return
 
+    voiceChannel = discord.utils.get(ctx.guild.voice_channels, name='General')
+    await voiceChannel.connect()
+    voice = discord.utils.get(client.voice_clients, guild=ctx.guild)
+
+    ydl_opts = {
+        'format': 'bestaudio/best',
+        'postprocessors': [{
+            'key': 'FFmpegExtractAudio',
+            'preferredcodec': 'mp3',
+            'preferredquality': '192',
+        }],
+    }
+    with youtube_dl.YoutubeDL(ydl_opts) as ydl:
+        ydl.download([url])
+    for file in os.listdir("./"):
+        if file.endswith(".mp3"):
+            os.rename(file, "song.mp3")
+    voice.play(discord.FFmpegPCMAudio("song.mp3"))
+
+@client.command()
+async def leave(ctx):
+    voice = discord.utils.get(client.voice_clients, guild=ctx.guild)
+    if voice.is_connected():
+        await voice.disconnect()
+    else:
+        await ctx.send("iam out peace")
+
+@client.command()
+async def pause(ctx):
+    voice = discord.utils.get(client.voice_clients, guild=ctx.guild)
+    if voice.is_playing():
+        voice.pause()
+    else:
+        await ctx.send("no music play no pause")
+
+@client.command()
+async def resume(ctx):
+    voice = discord.utils.get(client.voice_clients, guild=ctx.guild)
+    if voice.is_paused():
+        voice.resume()
+    else:
+        await ctx.send("music play no pause")
+
+@client.command()
+async def stop(ctx):
+    voice = discord.utils.get(client.voice_clients, guild=ctx.guild)
+    voice.stop
 # give role on react #
 @client.event
 async def on_raw_reaction_add(payload):
@@ -86,14 +153,18 @@ async def _8ball(ctx, *, question):
 # funny pp size mesure #
 @client.command(aliases=["size"])
 async def pp(ctx, member: discord.Member, *, reason=None):
-    responses = ["small uwu",
-                 "micro uwu",
-                 "smaller then micro uwu",
-                 "sowy its smoll uwu",
-                 "normal size uwu",
-                 "big 0-0",
-                 "MASSIVE",
-                 "NO CAP ITS SMALL UWU"]
+    responses = ["8D",
+                 "8=D",
+                 "8==D",
+                 "8===D",
+                 "8====D",
+                 "8=====D",
+                 "8======D",
+                 "8=======D",
+                 "8========D",
+                 "8=========D",
+                 "8==========D"
+                ]
     await ctx.send(f"{member.mention} {random.choice(responses)}")
 
 # coin flip #
@@ -131,3 +202,4 @@ async def ban(ctx, member: discord.Member, *, reason=None):
 
 # funny token thingy #
 client.run(";3")
+
