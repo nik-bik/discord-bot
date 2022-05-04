@@ -1,8 +1,6 @@
 ## wellcome to my discord bot project
 
-You can use the [editor on GitHub](https://github.com/ItzJustas/discord-bot/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
-
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+Iam making this bot with discord.py. I will be adding features to it as time goes on.
 
 ### Markdown
 
