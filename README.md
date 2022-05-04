@@ -1,2 +1,2 @@
-# waifu-bot
-a discord bot that is a waifu
+# discord bot
+a bot for discord for personal use
