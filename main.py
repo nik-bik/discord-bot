@@ -4,10 +4,15 @@ import random
 from discord.ext import commands
 import youtube_dl
 import os
-
+import datetime
+import asyncio
+import requests
+import socket
 
 client = commands.Bot(command_prefix=".", intents=discord.Intents.all())
-#start something msg idk why u ask me#
+
+
+# start something msg idk why u ask me#
 @client.event
 async def on_ready():
     greeting = ["hewo",
@@ -18,9 +23,38 @@ async def on_ready():
                 "ON",
                 "iam lazy bruh"]
     print(random.choice(greeting))
+
+#
+@client.command()
+async def iplookup(ctx, *, ipaddr: str = '9.9.9.9'):
+    r = requests.get(f"http://extreme-ip-lookup.com/json/{ipaddr}?key=;3")
+    geo = r.json()
+    em = discord.Embed()
+    fields = [
+        {'name': 'IP', 'value': geo['query']},
+        {'name': 'IP Type', 'value': geo['ipType']},
+        {'name': 'Country', 'value': geo['country']},
+        {'name': 'City', 'value': geo['city']},
+        {'name': 'Continent', 'value': geo['continent']},
+        {'name': 'IP Name', 'value': geo['ipName']},
+        {'name': 'ISP', 'value': geo['isp']},
+        {'name': 'Latitute', 'value': geo['lat']},
+        {'name': 'Longitude', 'value': geo['lon']},
+        {'name': 'Org', 'value': geo['org']},
+        {'name': 'Region', 'value': geo['region']},
+        {'name': 'Status', 'value': geo['status']},
+    ]
+    for field in fields:
+        if field['value']:
+            em.set_footer(text='\u200b')
+            em.timestamp = datetime.datetime.utcnow()
+            em.add_field(name=field['name'], value=field['value'], inline=True)
+    return await ctx.send(embed = em)
+
+
 #music#
 @client.command()
-async def play(ctx, url : str):
+async def play(ctx, url: str, name):
     song_there = os.path.isfile("song.mp3")
     try:
         if song_there:
@@ -29,7 +63,8 @@ async def play(ctx, url : str):
         await ctx.send("Wait for the current playing music to end or use the 'stop' command")
         return
 
-    voiceChannel = discord.utils.get(ctx.guild.voice_channels, name='General')
+    voiceChannel = discord.utils.get(ctx.guild.voice_channels, name=name)
+
     await voiceChannel.connect()
     voice = discord.utils.get(client.voice_clients, guild=ctx.guild)
 
@@ -46,7 +81,9 @@ async def play(ctx, url : str):
     for file in os.listdir("./"):
         if file.endswith(".mp3"):
             os.rename(file, "song.mp3")
+
     voice.play(discord.FFmpegPCMAudio("song.mp3"))
+
 
 @client.command()
 async def leave(ctx):
@@ -56,6 +93,7 @@ async def leave(ctx):
     else:
         await ctx.send("iam out peace")
 
+
 @client.command()
 async def pause(ctx):
     voice = discord.utils.get(client.voice_clients, guild=ctx.guild)
@@ -63,6 +101,7 @@ async def pause(ctx):
         voice.pause()
     else:
         await ctx.send("no music play no pause")
+
 
 @client.command()
 async def resume(ctx):
@@ -72,10 +111,13 @@ async def resume(ctx):
     else:
         await ctx.send("music play no pause")
 
+
 @client.command()
 async def stop(ctx):
     voice = discord.utils.get(client.voice_clients, guild=ctx.guild)
     voice.stop
+
+
 # give role on react #
 @client.event
 async def on_raw_reaction_add(payload):
@@ -129,9 +171,11 @@ async def reactrole(ctx, emoji, role: discord.Role, *, message):
 async def uwu(ctx):
     await ctx.send(f"uwu {round(client.latency * 1000)}ms")
 
+
 @client.command()
 async def web(ctx):
-	await ctx.send("this is not a feature yet ;~;")
+    await ctx.send("this is not a feature yet ;~;")
+
 
 # funny 8ball thingy #
 @client.command(aliases=["8ball"])
@@ -148,8 +192,6 @@ async def _8ball(ctx, *, question):
     await ctx.send(random.choice(responses))
 
 
-
-
 # funny pp size mesure #
 @client.command(aliases=["size"])
 async def pp(ctx, member: discord.Member, *, reason=None):
@@ -164,8 +206,9 @@ async def pp(ctx, member: discord.Member, *, reason=None):
                  "8========D",
                  "8=========D",
                  "8==========D"
-                ]
+                 ]
     await ctx.send(f"{member.mention} {random.choice(responses)}")
+
 
 # coin flip #
 @client.command(aliases=["coin flip", "coin"])
@@ -188,7 +231,7 @@ async def clear(ctx, amount=5):
 @commands.has_role("Admin")
 async def kick(ctx, member: discord.Member, *, reason=None):
     await member.kick(reason=reason)
-    await ctx.send (f"kicked {member.mention}, he was a miene ;~;")
+    await ctx.send(f"kicked {member.mention}, he was a miene ;~;")
 
 
 # ban command #
