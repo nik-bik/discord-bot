@@ -38,6 +38,12 @@ async def on_command_error(ctx, error):
     if isinstance(error, commands.CommandNotFound):
         await ctx.send("command not found. Type in .help for all of the commands")
 
+#gifs#
+exec(open("thingys py idk/gifs.py").read())
+
+#meme#
+exec(open("thingys py idk/meme.py").read())
+        
 #rule34#
 exec(open("thingys py idk/rule34.py").read())
 #search engine#
