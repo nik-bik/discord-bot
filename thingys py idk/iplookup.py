@@ -1,6 +1,6 @@
 @client.command()
 async def iplookup(ctx, *, ipaddr: str = '9.9.9.9'):
-    r = requests.get(f"http://extreme-ip-lookup.com/json/{ipaddr}?key=cD7yROsuCVowJaWDyqNr")
+    r = requests.get(f"http://extreme-ip-lookup.com/json/{ipaddr}?key=")
     geo = r.json()
     em = discord.Embed()
     fields = [
