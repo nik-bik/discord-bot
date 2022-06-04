@@ -37,6 +37,14 @@ async def on_ready():
 async def on_command_error(ctx, error):
     if isinstance(error, commands.CommandNotFound):
         await ctx.send("command not found. Type in .help for all of the commands")
+#logger#
+@client.event
+async def on_message(message):
+    ts = time.time()
+    st = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
+    await client.process_commands(message)
+    with open("logs.txt", "a") as text_file:
+        print(f"<{st}> <{message.author}> <{message.id}>  {message.content}", file=text_file)
 
 #gifs#
 exec(open("thingys py idk/gifs.py").read())
