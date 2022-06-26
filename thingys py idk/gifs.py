@@ -23,6 +23,16 @@ punch_gifs = ["https://c.tenor.com/EdV_frZ4e_QAAAAC/anime-naruto.gif",
               "https://c.tenor.com/aEX1wE-WrEMAAAAC/anime-right-in-the-stomach.gif",
               "https://c.tenor.com/dhiZs4RULI0AAAAC/ippo-hajime-no-ippo.gif"]
 
+slap_gifs = ["https://c.tenor.com/Ws6Dm1ZW_vMAAAAS/girl-slap.gif",
+             "https://c.tenor.com/eU5H6GbVjrcAAAAC/slap-jjk.gif",
+             "https://c.tenor.com/blbrtpA-HTgAAAAC/tapa.gif",
+             "https://c.tenor.com/nBaCVW8855oAAAAC/anime-slap.gif"]
+
+bonk_gifs = ["https://c.tenor.com/iDdGxlZZfGoAAAAC/powerful-head-slap.gif",
+             "https://c.tenor.com/FJsjk_9b_XgAAAAC/anime-hit.gif",
+             "https://c.tenor.com/31WOy2yRK3QAAAAC/chuunibyou-hit.gif",
+             "https://c.tenor.com/E6njrpISBV4AAAAC/bonk-hit.gif"]
+
 #punch command#
 @client.command()
 async def punch(ctx, member: discord.Member ):
@@ -72,5 +82,27 @@ async def kick(ctx, member: discord.Member):
         description= f"{ctx.author.mention} kicks {member.mention}"
     )
     embed.set_image(url=(random.choice(kick_gifs)))
+
+    await ctx.send(embed=embed)
+
+#slap#
+@client.command()
+async def slap(ctx, member: discord.Member):
+    embed = discord.Embed(
+        colour = (discord.Colour.random()),
+        description=f"{ctx.author.mention} slaps {member.mention}"
+    )
+    embed.set_image(url=(random.choice(slap_gifs)))
+
+    await ctx.send(embed=embed)
+
+#BONK#
+@client.command()
+async def bonk(ctx, member: discord.Member):
+    embed = discord.Embed(
+        colour = (discord.Colour.random()),
+        description=f"{ctx.author.mention} BONKS {member.mention}"
+    )
+    embed.set_image(url=(random.choice(bonk_gifs)))
 
     await ctx.send(embed=embed)
