@@ -46,6 +46,10 @@ async def on_message(message):
     with open("logs.txt", "a") as text_file:
         print(f"<{st}> <{message.author}> <{message.id}>  {message.content}", file=text_file)
 
+        
+#welcome#
+exec(open("thingys py idk/welcome.py").read())
+
 #gifs#
 exec(open("thingys py idk/gifs.py").read())
 
