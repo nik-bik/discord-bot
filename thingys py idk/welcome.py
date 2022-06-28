@@ -1,6 +1,6 @@
 @client.event
 async def on_member_join(member):
-    channel = client.get_channel(844235494749765654)
+    channel = client.get_channel(channel id)
     backround = Editor("pic.png")
     profile_image = await load_image_async(str(member.avatar_url))
     profile = Editor(profile_image).resize((150, 150)).circle_image()
