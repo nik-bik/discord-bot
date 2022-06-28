@@ -1,21 +1,10 @@
-import json
-import discord
-import random
+import discord, random, DiscordUtils, timestamp, youtube_dl, os, websocket, asyncio, requests, datetime, socket, rule34, time, xml.etree.ElementTree as et, urllib.request as u, urllib, json
 from discord.ext import commands
-import timestamp
 from googleapiclient.discovery import build
-import youtube_dl
-import os
-import websocket
-import datetime
-import asyncio
-import requests
-import socket
-import rule34
-import time
-import xml.etree.ElementTree as et
-import urllib.request as u
-import urllib
+from easy_pil import Editor, load_image_async, Font
+
+from discord import File
+
 
 client = commands.Bot(command_prefix=".", intents=discord.Intents.all())
 
