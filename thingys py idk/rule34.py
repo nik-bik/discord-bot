@@ -50,15 +50,6 @@ def rdl(str, int):
         print(f'[INFO {ltime}]: Not a webm, dont recurse.')
     return wr
 
-
-async def statuschange():
-    while True:
-        await client.change_presence(activity=discord.Game(name='...'))
-        await asyncio.sleep(10)
-        await client.change_presence(activity=discord.Game(name='w-w-what'))
-        await asyncio.sleep(10)
-
-
 @client.command()
 async def r4(ctx, *arg):
     answer = ''
