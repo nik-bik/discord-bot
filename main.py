@@ -20,6 +20,7 @@ async def on_ready():
                 "ON",
                 "iam lazy bruh"]
     print(random.choice(greeting))
+    await client.change_presence(activity=discord.Game(name='w-w-what'))
 
 
 @client.event
