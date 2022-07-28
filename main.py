@@ -34,7 +34,7 @@ async def on_message(message):
     st = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
     await client.process_commands(message)
     with open("logs.txt", "a") as text_file:
-        print(f"<{st}> <{message.author}> <{message.id}>  {message.content}", file=text_file)
+        print(f"<{st}> <{message.guild.name}> <{message.author}> <{message.id}>  {message.content}", file=text_file)
 
         
 #welcome#
