@@ -5,7 +5,6 @@ from easy_pil import Editor, load_image_async, Font
 
 from discord import File
 
-
 client = commands.Bot(command_prefix=".", intents=discord.Intents.all())
 
 
